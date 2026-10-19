@@ -305,7 +305,7 @@ section[id]{scroll-margin-top:60px}
 <h3 id="video-title" style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 600; font-size: 26px; line-height: 1.2; margin: 0; padding-right: 40px">{{video.title}}</h3>
 <video controls="" playsinline="" preload="metadata" poster="{{video.poster}}" src="{{video.src}}" style="display: block; width: 100%; max-height: 62vh; border-radius: 8px; background: #000000"></video>
 <p style="margin: 0; font-size: 17px; line-height: 1.65">{{video.about}}</p>
-<p style="margin: 0; padding: 12px 14px; background: #E2EEEB; border-radius: 8px; font-size: 14px; line-height: 1.5; color: #3A4D5C">John Waters led this from storyboard through every round of edits to the final cut. Produced by an outside video studio.</p>
+<p style="margin: 0; padding: 12px 14px; background: #E2EEEB; border-radius: 8px; font-size: 14px; line-height: 1.5; color: #3A4D5C">John Waters led this from storyboard through every round of edits to the final cut. <sc-if value="{{video.studio}}" hint-placeholder-val="{{ false }}">Design and animation by <a href="{{video.studioUrl}}">{{video.studio}}</a>.</sc-if><sc-if value="{{video.noStudio}}" hint-placeholder-val="{{ true }}">Produced by an outside video studio.</sc-if></p>
 </div>
 </div>
 </sc-if>
@@ -351,7 +351,7 @@ section[id]{scroll-margin-top:60px}
 <div style="max-width: 1160px; margin: 0 auto; padding: 40px 24px; display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: center; font-size: 14px; color: #C9D6E0">
 <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 18px; font-weight: 600; color: #FFFFFF">John Waters</span>
 <a href="https://www.linkedin.com/in/watersjb" style="color: #7FD1B5; font-weight: 600">LinkedIn</a>
-<span>All work shown is publicly published. <a href="archive.html" style="color: #8FA3B4; font-size: 12px; text-decoration: none">Archive</a></span>
+<span>All work shown is publicly published. <a href="archive.html" style="color: #8FA3B4; font-size: 12px; text-decoration: none">See all work</a></span>
 </div>
 </footer>
 
@@ -633,35 +633,44 @@ const VIDEOS = [
   "length": "2:10",
   "src": "assets/463dde6e0650768a059c10a7588ac1dc.mp4",
   "poster": "assets/ee27cba3ab99c4fd5b72d663472bdf67.jpg",
-  "about": "Made for the launch of Xaxis, and the first video John directed. It's built around the idea of an audience portrait, showing how the signals people leave across ads, online video and search come together so a brand can reach the right person with the right message on any screen."
+  "about": "Made for the launch of Xaxis, and the first video John directed. It's built around the idea of an audience portrait, showing how the signals people leave across ads, online video and search come together so a brand can reach the right person with the right message on any screen.",
+  "keep": true
+ },
+ {
+  "title": "Xaxis: Better Audiences, Better Insights",
+  "length": "1:38",
+  "src": "assets/c741aceb2634fba01827dd762a563383.mp4",
+  "poster": "assets/b88fb002254aca46d58ef6bd2465bbd1.jpg",
+  "about": "An animated brand story about moving past spray-and-pray ad buying. It shows how Xaxis pulls data together into custom audience segments, puts analysts on every campaign, and turns better audiences and better insights into results clients can see.",
+  "keep": true,
+  "studio": "Senior Post",
+  "studioUrl": "https://www.senior-post.com/"
  },
  {
   "title": "What We Do",
   "length": "2:18",
   "src": "assets/4acef347c83af1f09aa90fc95817444e.mp4",
   "poster": "assets/45b901b7f297e2ac8b68736b528b1691.jpg",
-  "about": "An animated explainer that follows one person through his day, from a social feed to booking a flight to a music festival, to show how Xaxis connects those moments and reaches him with a relevant ad at each one."
+  "about": "An animated explainer that follows one person through his day, from a social feed to booking a flight to a music festival, to show how Xaxis connects those moments and reaches him with a relevant ad at each one.",
+  "keep": true,
+  "studio": "Senior Post",
+  "studioUrl": "https://www.senior-post.com/"
  },
  {
   "title": "The Programmatic Primer",
   "length": "3:53",
   "src": "assets/636ec6eae1c5a8a3f13b71ce3e8d5032.mp4",
   "poster": "assets/f8eafc92560bb3b71200693b64b8ff62.jpg",
-  "about": "A primer on how programmatic advertising works, from ad exchanges and real-time bidding to the Xaxis DMP, and how Xaxis brings publishers, networks, exchanges and premium inventory together across every screen."
- },
- {
-  "title": "Xaxis: Bigger. Stronger. Smarter.",
-  "length": "0:53",
-  "src": "assets/90e92b00491cda3efe3840d76fc553ea.mp4",
-  "poster": "assets/ea4c08c5cfe28f5f814a0dd3b1a249af.jpg",
-  "about": "A short brand sizzle showing Xaxis at scale: $750 million in managed spend, audience development across channels and data assets, and a premium marketplace for programmatic media on every screen."
+  "about": "A primer on how programmatic advertising works, from ad exchanges and real-time bidding to the Xaxis DMP, and how Xaxis brings publishers, networks, exchanges and premium inventory together across every screen.",
+  "keep": false
  },
  {
   "title": "Turbine: The Next Generation in the Data Management Platform",
   "length": "1:43",
   "src": "assets/df7bb44a09d1a44e3f62ef83b2d94697.mp4",
   "poster": "assets/0f56be8be39c6b01e2951d0fa5805b61.jpg",
-  "about": "A product video introducing Turbine, the Xaxis data management platform, built to help clients find the right audiences among billions of available impressions and put a limited budget where it will do the most."
+  "about": "A product video introducing Turbine, the Xaxis data management platform, built to help clients find the right audiences among billions of available impressions and put a limited budget where it will do the most.",
+  "keep": true
  }
 ];
 const TALKS = [
@@ -672,7 +681,8 @@ const TALKS = [
   "href": "dmn-podcast.html",
   "cta": "Listen",
   "poster": "assets/ef6a5c39017ea36c1889804d2ae08f0d.jpg",
-  "note": "Interview with DMN News"
+  "note": "Interview with DMN News",
+  "keep": true
  },
  {
   "org": "Webinar",
@@ -680,7 +690,8 @@ const TALKS = [
   "title": "The Cost of Malvertising: Hidden Threats Every Publisher Needs to Understand",
   "href": "https://www.humansecurity.com/learn/resources/the-cost-of-malvertising-hidden-threats-every-publisher-needs-to-understand/",
   "cta": "Watch",
-  "poster": "assets/f5237fb030713df51be8b6c74ba5d2aa.jpg"
+  "poster": "assets/f5237fb030713df51be8b6c74ba5d2aa.jpg",
+  "keep": true
  },
  {
   "org": "Video",
@@ -689,7 +700,8 @@ const TALKS = [
   "href": "https://www.humansecurity.com/learn/resources/humans-mediaguard/",
   "cta": "Watch",
   "poster": "assets/ecba0b61c6efe691ffaa5b14829cc288.jpg",
-  "pos": "right bottom"
+  "pos": "right bottom",
+  "keep": true
  },
  {
   "org": "Webinar",
@@ -697,7 +709,8 @@ const TALKS = [
   "title": "Bad Bots: Exposing Bots on Site Before They Distort Marketing Decisions",
   "href": "https://www.youtube.com/watch?v=3NujDsdwPs4",
   "cta": "Watch",
-  "poster": "assets/f365788fec0db8f03636732536ed1f6d.jpg"
+  "poster": "assets/f365788fec0db8f03636732536ed1f6d.jpg",
+  "keep": true
  },
  {
   "org": "Video",
@@ -705,7 +718,8 @@ const TALKS = [
   "title": "Marketing Integrity from White Ops",
   "href": "https://www.youtube.com/watch?v=Aj4rePrH7fM",
   "cta": "Watch",
-  "poster": "assets/ed8e2182c3b39913d411d2d9c557c1ef.jpg"
+  "poster": "assets/ed8e2182c3b39913d411d2d9c557c1ef.jpg",
+  "keep": false
  }
 ];
 const INFOGRAPHICS = [
@@ -765,7 +779,7 @@ const CASES = [
   "label": "Case study · Ad Fraud Defense",
   "title": "Sophisticated Tools Required to Stay Ahead of Today's Fraud",
   "href": "https://www.humansecurity.com/wp-content/uploads/2025/03/HMN_011225_Video-Platform-Case-Study.pdf",
-  "thumb": "",
+  "thumb": "assets/382c07853e1e88ff2f668557e9768045.jpg",
   "keep": false
  },
  {
@@ -774,7 +788,7 @@ const CASES = [
   "label": "Case study · Ad Fraud Defense",
   "title": "Superior Precision and Accuracy Fights Fraud while Growing Revenue Potential",
   "href": "https://www.humansecurity.com/wp-content/uploads/2025/01/HMN_011425_RISECaseStudy.pdf",
-  "thumb": "",
+  "thumb": "assets/5255d5f5380b47e7e930a95d1b0e7a21.jpg",
   "keep": false
  },
  {
@@ -792,7 +806,7 @@ const CASES = [
   "label": "Case study · Malvertising Defense",
   "title": "Factinate Protects Audience Experience Without Sacrificing Revenue",
   "href": "https://www.humansecurity.com/wp-content/uploads/2025/01/HMN_011325_Factinate-Case-Study.pdf",
-  "thumb": "",
+  "thumb": "assets/57aba800d2c66baccea4ca40b5738c9e.jpg",
   "keep": false
  },
  {
@@ -859,21 +873,21 @@ const BRIEFS = [
   "title": "Advertising Protection for Platforms",
   "label": "Package brief",
   "href": "https://www.humansecurity.com/wp-content/uploads/HUMAN_Package-Brief_Advertising-Protection-for-Platforms.pdf",
-  "thumb": "",
+  "thumb": "assets/1c32d768478ff7034068b3a9f242d8db.jpg",
   "keep": false
  },
  {
   "title": "Advertising Protection for Publishers",
   "label": "Package brief",
   "href": "https://www.humansecurity.com/wp-content/uploads/HUMAN_Package-Brief_Advertising-Protection-for-Publishers.pdf",
-  "thumb": "",
+  "thumb": "assets/235c3644312baef560b4d424b4580046.jpg",
   "keep": false
  },
  {
   "title": "Ad Tech Platforms",
   "label": "Solution brief",
   "href": "https://www.humansecurity.com/wp-content/uploads/HUMAN_Solution-Brief_Ad-Tech-Platforms.pdf",
-  "thumb": "",
+  "thumb": "assets/99948b5e7a1eb284bebe18eb79951f73.jpg",
   "keep": false
  },
  {
@@ -887,7 +901,7 @@ const BRIEFS = [
   "title": "Ad Fraud Sensor for Platforms",
   "label": "Solution brief · 2025",
   "href": "https://www.humansecurity.com/wp-content/uploads/2025/01/HMN_050725_Ad-Fraud-Sensor-Platforms-Brief.pdf",
-  "thumb": "",
+  "thumb": "assets/58de14805c0f4041f6d911ceceee8718.jpg",
   "keep": false
  },
  {
@@ -929,7 +943,7 @@ const BRIEFS = [
   "title": "Ad Quality Defense for Publishers",
   "label": "Solution brief · 2024",
   "href": "https://www.humansecurity.com/wp-content/uploads/2025/01/HMN_120924_Ad-Quality-Defense-Publishers-Brief.pdf",
-  "thumb": "",
+  "thumb": "assets/457292da43f2f59ab9db1d9f401b4bf8.jpg",
   "keep": false
  },
  {
@@ -992,8 +1006,8 @@ else if (p.ebook) ebooks.push(card(Object.assign(base, { thumb: p.cover || '', p
 else writing.push(card(Object.assign(base, { thumb: p.thumb || '', pos: p.pos || 'center' })));
 });
 INFOGRAPHICS.filter((x) => x.keep).forEach((x) => ebooks.push(card({ isHref: true, href: x.href, thumb: x.thumb, pos: 'top', label: x.label, title: x.title, tile: 'HUMAN', cta: 'View the PDF ↗' })));
-const talks = TALKS.map((t) => card({ isHref: true, href: t.href, thumb: t.poster || '', pos: t.pos || 'center', label: t.label, title: t.title, note: t.note || '', tile: tileFor(t.title), play: t.org === 'Video', cta: t.cta + ' ↗', isVid: t.org === 'Video' }));
-const vids = VIDEOS.map((v, i) => card({ isButton: true, act: () => this.setState({ video: i }), thumb: v.poster, play: true, label: 'Video · Xaxis · ' + v.length, title: v.title, note: 'Led from storyboard to final cut' }));
+const talks = TALKS.filter((t) => t.keep !== false).map((t) => card({ isHref: true, href: t.href, thumb: t.poster || '', pos: t.pos || 'center', label: t.label, title: t.title, note: t.note || '', tile: tileFor(t.title), play: t.org === 'Video', cta: t.cta + ' ↗', isVid: t.org === 'Video' }));
+const vids = VIDEOS.map((v, i) => v.keep === false ? null : card({ isButton: true, act: () => this.setState({ video: i }), thumb: v.poster, play: true, label: 'Video · Xaxis · ' + v.length, title: v.title, note: 'Led from storyboard to final cut' + (v.studio ? ' · Animation by ' + v.studio : '') }));
 const ordered = (all, order) => order.map((o) => all.find((x) => x.title.indexOf(o) === 0)).filter(Boolean).concat(all.filter((x) => !order.some((o) => x.title.indexOf(o) === 0)));
 return {
 accent: this.props.accent ?? '#7FD1B5',
@@ -1003,12 +1017,12 @@ cases: CASES.filter((c) => c.keep).map((c) => card({ isHref: true, href: c.href,
 ebooks: ebooks,
 briefs: BRIEFS.filter((b) => b.keep).map((b) => card({ isHref: true, href: b.href, thumb: b.thumb, pos: 'top', label: b.label, title: b.title, tile: 'HUMAN', cta: 'PDF ↗' })),
 webinars: ordered(mediaModal.concat(talks.filter((t) => !t.isVid)), ['The Cost of Malvertising', 'Premium at Scale', 'One on One', 'Bad Bots']),
-videos: ordered(vids.concat(talks.filter((t) => t.isVid)), ['Xaxis Brand Video', 'What We Do', "HUMAN's MediaGuard", 'Marketing Integrity from White Ops']),
+videos: ordered(vids.filter(Boolean).concat(talks.filter((t) => t.isVid)), ['Xaxis Brand Video', 'Xaxis: Better Audiences', "HUMAN's MediaGuard", 'What We Do', 'Turbine', 'Marketing Integrity from White Ops']),
 hasOpen: openIndex >= 0,
 open: openIndex >= 0 ? WRITING[openIndex] : { paras: [], qa: [] },
 close: () => this.setState({ open: -1 }),
 hasVideo: vIndex >= 0,
-video: vIndex >= 0 ? VIDEOS[vIndex] : {},
+video: vIndex >= 0 ? Object.assign({ noStudio: !VIDEOS[vIndex].studio }, VIDEOS[vIndex]) : {},
 closeVideo: () => this.setState({ video: -1 })
 };
 }
