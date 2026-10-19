@@ -1,0 +1,65 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>DMN Podcast Interview</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: single reading column, archive note, player card, then summary */
+:root{
+  --bg:#F8FAFA; --fg:#1A2229; --muted:#59636C; --rule:#DCDDD8; --note:#E6EFEE; --card:#FFFFFF; --accent:#0B7A5E;
+  --serif:'Literata', Georgia, 'Times New Roman', serif;
+  --sans:'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#14191E; --fg:#E7E9EA; --muted:#9AA3AB; --rule:#2E363D; --note:#1D242A; --card:#1B2228; --accent:#5CC9A7; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#14191E; --fg:#E7E9EA; --muted:#9AA3AB; --rule:#2E363D; --note:#1D242A; --card:#1B2228; --accent:#5CC9A7; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--serif);font-size:18px;line-height:1.7}
+.wrap{max-width:680px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:56px 80px;display:flex;flex-direction:column;gap:36px}
+.archive{font-family:var(--sans);font-size:15px;line-height:1.6;background:var(--note);border-radius:8px;padding:18px 20px;color:var(--muted);display:flex;flex-direction:column;gap:6px}
+.archive strong{color:var(--fg);font-weight:600}
+.eyebrow{font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+header{display:flex;flex-direction:column;gap:14px}
+h1{font-size:clamp(30px,6vw,42px);line-height:1.15;font-weight:600;margin:0;text-wrap:balance}
+.dek{font-style:italic;color:var(--muted);margin:0;font-size:19px}
+.meta{font-family:var(--sans);font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
+.player{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:20px;display:flex;flex-direction:column;gap:12px}
+.player span{font-family:var(--sans);font-size:14px;font-weight:600}
+audio{width:100%}
+.cover{display:block;width:100%;max-width:100%;height:auto;border-radius:10px}
+.summary{border-top:1px solid var(--rule);padding-top:28px;display:flex;flex-direction:column;gap:14px}
+.summary h2{font-family:var(--sans);font-size:14px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin:0}
+.summary p{margin:0}
+a{color:var(--accent)}
+a:focus-visible,audio:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+
+<main class="wrap">
+  <a href="index.html" style="font-family:var(--sans);font-size:14px;font-weight:600;text-decoration:none">← John Waters portfolio</a>
+  <aside class="archive" aria-label="About this page">
+    <span><strong>Archived copy.</strong> Originally released by DMN on its One-on-One podcast on April 12, 2019. The original episode page is no longer online, so the audio is kept here.</span>
+    <span>John Waters was VP of Marketing at AnyClip at the time.</span>
+  </aside>
+
+  <header>
+    <span class="eyebrow">Podcast · DMN One-on-One</span>
+    <h1>One on One: Content Meets Audience with John Waters</h1>
+    <p class="dek">John Waters on how AnyClip is using content to find audiences</p>
+    <span class="meta">April 12, 2019 · 21 min</span>
+  </header>
+
+  <img class="cover" src="assets/dmn-podcast-cover.jpg" alt="DMN One-on-One podcast artwork for Content Meets Audience with John Waters, April 12, 2019" width="596" height="506">
+
+  <section class="player" aria-label="Episode audio">
+    <span>Listen to the episode</span>
+    <audio id="episode" controls preload="metadata" src="assets/dmn-podcast.m4a"></audio>
+  </section>
+
+  <section class="summary">
+    <h2>What we talked about</h2>
+    <p>Kim Davis of DMN talks with John about AnyClip's AI engine, which looks at the video itself rather than its title, comments or past history, and generates metadata in real time. John explains how that lets AnyClip tag content down to three levels of the IAB taxonomy, apply brand safety models, and build custom categories for advertisers, like finding every celebration moment in March Madness footage for a tissue brand.</p>
+    <p>From there they get into why brand safety is harder in video, how each brand has to decide what content it's comfortable sitting next to, and why contextual targeting holds up as privacy rules tighten. It reaches people while they're engaged with a topic, works on shared devices, and skips the creepy factor of ads that follow you around. They close on ads.txt and GDPR, and why neither one actually solves brand safety.</p>
+  </section>
+</main>
+
+</body></html>
