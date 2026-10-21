@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Impact of Elections on Malvertising Patterns</title>
+<meta name="description" content="The Impact of Elections on Malvertising Patterns, by John Waters. Reprinted from the HUMAN blog.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#F8FAFA;--fg:#1A2229;--muted:#59636C;--rule:#DCDDD8;--note:#E6EFEE;--accent:#0B7A5E;
+--serif:'Literata',Georgia,'Times New Roman',serif;--sans:'IBM Plex Sans',system-ui,-apple-system,sans-serif;color-scheme:light}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#14191E;--fg:#E7E9EA;--muted:#9AA3AB;--rule:#2E363D;--note:#1D242A;--accent:#5CC9A7;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#14191E;--fg:#E7E9EA;--muted:#9AA3AB;--rule:#2E363D;--note:#1D242A;--accent:#5CC9A7;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--serif);font-size:18px;line-height:1.7}
+.wrap{max-width:720px;margin:0 auto;padding:40px 16px 80px;display:flex;flex-direction:column;gap:32px}
+.back{font-family:var(--sans);font-size:14px;font-weight:600;text-decoration:none}
+.archive{font-family:var(--sans);font-size:15px;line-height:1.6;background:var(--note);border-radius:8px;padding:16px 20px;color:var(--muted);display:flex;flex-direction:column;gap:4px}
+.archive strong{color:var(--fg);font-weight:600}
+header{display:flex;flex-direction:column;gap:14px}
+.eyebrow{font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+h1{font-size:clamp(30px,6vw,42px);line-height:1.15;font-weight:600;margin:0;text-wrap:balance}
+.meta{font-family:var(--sans);font-size:14px;color:var(--muted)}
+.meta b{color:var(--fg);font-weight:600}
+.herofig{margin:0;display:flex;flex-direction:column;gap:8px}
+.herofig figcaption{font-family:var(--sans);font-size:14px;color:var(--muted)}
+.hero{display:block;width:100%;height:auto;border-radius:10px;aspect-ratio:auto}
+article{display:flex;flex-direction:column;gap:20px;border-top:1px solid var(--rule);padding-top:32px}
+article p{margin:0}
+article figure{margin:8px 0;display:flex;flex-direction:column;gap:8px}
+article figure img{display:block;max-width:100%;height:auto;border:1px solid var(--rule);border-radius:6px;background:#fff}
+article figcaption{font-family:var(--sans);font-size:14px;color:var(--muted)}
+article strong{font-weight:600}
+article hr{border:0;border-top:1px solid var(--rule);margin:8px 0;width:100%}
+article .bio{font-style:italic;color:var(--muted);font-size:16px}
+article .note{font-style:italic;color:var(--muted);padding-left:16px;border-left:3px solid var(--rule)}
+article h2{font-family:var(--sans);font-size:22px;line-height:1.3;font-weight:600;margin:16px 0 0;text-wrap:balance}
+article ul{margin:0;padding-left:24px;display:flex;flex-direction:column;gap:8px}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+</head>
+<body>
+<main class="wrap">
+<a class="back" href="index.html">← John Waters portfolio</a>
+<aside class="archive" aria-label="About this page">
+<span><strong>Reprinted copy.</strong> Originally published June 23, 2025 on the HUMAN blog. <a href="https://www.humansecurity.com/learn/blog/the-impact-of-elections-on-malvertising-patterns/" target="_blank" rel="noopener">Read the original</a>.</span>
+<span>Co-written by John Waters with Jeff Matthies and Lindsay Superczynski-Matthies.</span>
+</aside>
+<header>
+<span class="eyebrow">HUMAN Blog</span>
+<h1>The Impact of Elections on Malvertising Patterns</h1>
+<span class="meta"><b>Jeff Matthies, John Waters, Lindsay Superczynski-Matthies</b> · June 23, 2025 · 9 min read · Malvertising, Research &amp; Detection</span>
+</header>
+<figure class="herofig"><img class="hero" src="assets/blog-elections-malvertising.jpg" alt="Abstract iridescent glass shapes crossed by dark bars"></figure>
+<article>
+<p>2024’s election cycle featured a surge in digital advertising volumes, creating a prime opportunity for malicious actors. A recent HUMAN analysis of malvertising threat activity revealed a spike in threats and ad quality violations during and associated with the election, underscoring a clear pattern of exploitation during major increases in online activity.</p>
+<p>These attacks serve as valuable case studies for understanding how malicious actors capitalize on increased ad spending and user traffic. The patterns we identified—especially targeting news websites during peak consumption hours—offer direct insights into current and future threats. By looking closely at these attack surges, we gain crucial understanding of how malvertisers behave during periods of increased spending and user engagement, strengthening defense strategies and protecting the integrity of the advertising ecosystem.</p>
+<p>In the course of this investigation, HUMAN researchers observed:</p>
+<ul><li><strong>A massive surge in political ad spending:</strong> This created openings for opportunistic malvertising campaigns, attempting to hide in the sheer volume of advertising leading up to and following the election.</li><li><strong>Malicious landing pages (MLPs):</strong> These pages are purpose-built to exploit the increased volume of ads and ensnare users.</li><li><strong>Targeted MLP attacks against major news websites:</strong> Knowing that key news websites are crucial channels of public information, threat actors targeted these outlets.</li></ul>
+<p>These three interconnected elements provided valuable insight into the present-day and evolving malvertising strategies and reinforce the importance of proactive defense measures.</p>
+<h2>Running Up the Bill: Election-Related Content Opens Door for Malvertising</h2>
+<p>Overall political ad spending reached nearly $11 billion during the 2024 election, in part fueling an explosive digital ad surge and shaping the cyber threat landscape during the election season.</p>
+<p>HUMAN’s publisher and platform customers, especially those who monetize or publish political content, observed a dramatic increase in overall traffic as the election approached. HUMAN also observed this surge mirrored in the increased volumes of ads that we classified as political for our clients.</p>
+<p>HUMAN’s Malvertising Defense identified a <strong>30,000% jump</strong> in ads with political content in the two months preceding the election. These ads, which were not malicious, were blocked by publishers that didn’t want politically-themed ads on their websites. The surge illustrates how quickly the prevailing content of ads can shift, and why partners need support to mitigate risks associated with serving ads they don’t want running alongside their content.</p>
+<figure><img src="assets/blog-elections-malvertising--1.jpg" alt="Line chart titled Ads with Political Content, showing the rate of political ads rising from near zero in early September 2024 to its highest point in late October" loading="lazy" width="1400" height="980"></figure>
+<p>Some publishers and platforms choose to block political ads as a matter of policy, but the political ad surge created a chaotic environment with threat actors seeking to exploit the heightened activity. This surge in volume served as a catalyst for the jump in malvertising activity.</p>
+<h2>Riding the Media Wave: Targeting the News</h2>
+<p>Recognizing this surge in activity, threat actors focused their attacks on news websites. Both national and local news platforms and publishers felt these targeted attacks with a notable increase in attack volumes, primarily MLP attacks and redirect attacks. Attackers exploited the amplified visibility and high traffic during peak reporting periods.</p>
+<p>Researchers observed that threat activity consistently spiked after working hours (EST). This coincided with increased press coverage and online news consumption driven by high election interest. The night of the election itself recorded the most significant spike in this targeted malicious activity.</p>
+<figure><img src="assets/blog-elections-malvertising--2.jpg" alt="Line chart titled Malvertising Threats on Election Day, showing threats on news sites staying low through the day and spiking sharply in the evening" loading="lazy" width="1400" height="907"></figure>
+<p>This targeting aimed to capitalize on the heightened user engagement with news content. By injecting their malicious ad content into these moments of peak news viewership, attackers dramatically increased the likelihood of their attacks hitting their marks and victimizing visitors to the websites. The threat actors effectively “rode the media wave,” using the public’s attention on important election-related news as a vehicle to amplify their own malicious messages and campaigns. The sheer scale of the visitor surge meant a much wider potential spread for these attacks.</p>
+<h2>The Unseen Malvertising Parade During Inauguration Day</h2>
+<p>During Inauguration Day activities, the Human Defense Platform flagged a second significant surge in scam ads and malicious landing pages (MLPs). This influx included a marked increase in fraudulent offers, phishing attempts, and deceptive content. The spike in activity corresponded with the number of people online engaging with content surrounding the inauguration. This targeted activity underscores how threat actors take advantage of moments of national and global attention to maximize the reach and potential impact of their attacks.</p>
+<h2>Malicious Landing Pages: A Case Study in Threat Actor Tactics</h2>
+<p>Attackers’ tactics didn’t end with disrupting news consumption; they extended to luring users to malicious landing pages. Malicious Landing Pages (MLPs) are a type of attack through which users navigate to deceptive sites by clicking on misleading, attention-grabbing, or clickbait creative images. These were by far the most common category of attack on these news sites. Below is a chart of three prominent MLP attack subtypes as observed by HUMAN and their respective volume trends in the hours leading up to and during election night. These MLP attacks can be broadly described or understood as scams, including Fake Product Phishing Scams, Cost Saving Scams, Fake Quiz Scams, and Tech Support Scams. More below on how these types of scams harm users.</p>
+<figure><img src="assets/blog-elections-malvertising--3.jpg" alt="Line chart titled Malicious Landing Page Volume, showing hour-by-hour spikes from November 3 to November 6, 2024" loading="lazy" width="1400" height="907"></figure>
+<p>To understand the nature of these malicious pages, let’s examine some specific campaigns that were identified:</p>
+<p><strong>Fake Product Phishing Scam (“Barksnomore”):</strong> Characteristics of this type of attack include:</p>
+<ul><li>Promotion of a product known to researchers to be of poor quality or never delivered to purchasers.</li><li>Charging customers varying prices, recurring subscriptions, and/or multiple charges - all of which users did not consent to receive.</li><li>Attempting to collect sensitive user information, including bank details and Social Security Numbers, through a "Become Affiliate” section of the site.</li></ul>
+<figure><img src="assets/blog-elections-malvertising--4.jpg" alt="Banner ad reading Teach Your Dog Not To Bark, from barksnomore.com" loading="lazy" width="730" height="89"><figcaption>Example of a Fake Product Phishing Scam malicious ad</figcaption></figure>
+<figure><img src="assets/blog-elections-malvertising--5.jpg" alt="Landing page headlined How to Easily Stop Pet’s Bad Behaviors Fast, with dog photos and fake media logos" loading="lazy" width="1400" height="689"><figcaption>Example of the malicious landing page associated with the Fake Product Phishing Scam</figcaption></figure>
+<p><strong>Cost Saving Scam (“Getsyngas”):</strong> Characteristics of this type of attack include:</p>
+<ul><li>An “advertorial” aesthetic, designed to garner trust by convincing users that the landing page is a legitimate news article.</li><li>Sensationalized headlines and content intended to encourage users to complete a purchase.</li><li>Promoting a product that either never arrives or is largely non-functional on arrival.</li></ul>
+<figure><img src="assets/blog-elections-malvertising--6.jpg" alt="Fake news-style page headlined BREAKING: Big Oil Wants to Make the Fuel-Saving Device Illegal" loading="lazy" width="1400" height="680"><figcaption>Example of a malicious landing page associated with a Cost Saving Scam</figcaption></figure>
+<p><strong>Tech Support Scam:</strong> Characteristics of this type of attack include:</p>
+<ul><li>Simple creative images (as seen below) that are vague and directly entices site visitors to click.</li><li>Drives users to a site that displays numerous popups and alerts claiming that the user’s device has been compromised with malware or a virus.</li><li>Attempts to lure the user to call the number displayed in a pop-up, where threat actors attempt to extract personal information from the user through social engineering.</li></ul>
+<figure><img src="assets/blog-elections-malvertising--7.jpg" alt="Plain text ad reading Click Here To Continue" loading="lazy" width="107" height="55" style="width:auto"><figcaption>Example of a Tech Support Scam malicious ad</figcaption></figure>
+<figure><img src="assets/blog-elections-malvertising--8.jpg" alt="Fake Apple security warning pop-ups urging the visitor to call a support number" loading="lazy" width="1400" height="705"><figcaption>Example of a malicious landing page associated with the Tech Support Scam</figcaption></figure>
+<h2>Adapt and Defend: Learning From Election Season Threats</h2>
+<p>The 2024 US election season was a clear demonstration of how threat actors take advantage of moments of intense online engagement to launch and scale sophisticated malvertising campaigns. These election-specific tactics—including targeting high-profile news sites—directly inform our understanding of the threats we face right now.</p>
+<p>This malvertising surge illustrates a critical principle: attackers will use any surge in online activity for malvertising. Our researchers witnessed strategic targeting of news sites to deliver malicious ads during peak visitor influx and the unleashing of numerous new creatives driving to malicious landing pages. These interconnected tactics formed a larger effort to exploit the digital landscape via malvertising. This principle informs platforms and publishers alike about when they might expect future surges in activity: major elections, international sporting events, even releases of high-profile entertainment, like movies or TV shows, or unexpected viral moments. In short, if it’s something people want to engage with, threat actors will try to worm their way into the system to peel off some money for themselves.</p>
+<p>Organizations must shift from reactive, maintenance-heavy approaches to proactive defense systems that scale automatically. <strong>Be ready for traffic surges whenever they occur</strong>—whether from planned events or unexpected viral moments—by implementing real-time, page-level malvertising protection that operates without manual intervention.</p>
+<p><strong>Choose solutions that catch threats at the page level, regardless of how malicious content gets delivered.</strong> The most effective defenses learn from attack patterns in real-time, staying ahead of morphing campaigns that easily bypass network-level filters. Unlike traditional approaches requiring constant updates and additional staffing during surges, page-level solutions scale seamlessly without extra attention when protection is needed most.</p>
+<h2>HUMAN's Malvertising Defense: Be Prepared for Any Surge</h2>
+<p>HUMAN’s Malvertising Defense is designed to scale seamlessly and preemptively to address sophisticated threats across the digital ecosystem.</p>
+<p>Publishers use our advanced on-page script to intercept threats in all creatives, and we empower our platform clients to mitigate malicious creatives. These systems form an interconnected intelligence network that learns and improves with each detection, effectively thwarting emerging threats and protecting site visitors. This system’s effectiveness is further enhanced by our threat intelligence team, which actively hunts for attack vectors and meticulously examines landing pages, addressing sophisticated malvertising attempts that typically evade other solutions.</p>
+<p>Ready to stay ahead of these evolving threats? Discover how HUMAN can protect you against malvertising threats to safeguard your inventory and reputation.</p>
+</article>
+</main>
+</body>
+</html>

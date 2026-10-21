@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unmasking malvertising: How obfuscation creates false safety and how to defeat it</title>
+<meta name="description" content="Unmasking malvertising: How obfuscation creates false safety and how to defeat it, by John Waters. Reprinted from the HUMAN blog.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#F8FAFA;--fg:#1A2229;--muted:#59636C;--rule:#DCDDD8;--note:#E6EFEE;--accent:#0B7A5E;
+--serif:'Literata',Georgia,'Times New Roman',serif;--sans:'IBM Plex Sans',system-ui,-apple-system,sans-serif;color-scheme:light}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#14191E;--fg:#E7E9EA;--muted:#9AA3AB;--rule:#2E363D;--note:#1D242A;--accent:#5CC9A7;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#14191E;--fg:#E7E9EA;--muted:#9AA3AB;--rule:#2E363D;--note:#1D242A;--accent:#5CC9A7;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--serif);font-size:18px;line-height:1.7}
+.wrap{max-width:720px;margin:0 auto;padding:40px 16px 80px;display:flex;flex-direction:column;gap:32px}
+.back{font-family:var(--sans);font-size:14px;font-weight:600;text-decoration:none}
+.archive{font-family:var(--sans);font-size:15px;line-height:1.6;background:var(--note);border-radius:8px;padding:16px 20px;color:var(--muted);display:flex;flex-direction:column;gap:4px}
+.archive strong{color:var(--fg);font-weight:600}
+header{display:flex;flex-direction:column;gap:14px}
+.eyebrow{font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+h1{font-size:clamp(30px,6vw,42px);line-height:1.15;font-weight:600;margin:0;text-wrap:balance}
+.meta{font-family:var(--sans);font-size:14px;color:var(--muted)}
+.meta b{color:var(--fg);font-weight:600}
+.herofig{margin:0;display:flex;flex-direction:column;gap:8px}
+.herofig figcaption{font-family:var(--sans);font-size:14px;color:var(--muted)}
+.hero{display:block;width:100%;height:auto;border-radius:10px;aspect-ratio:auto}
+article{display:flex;flex-direction:column;gap:20px;border-top:1px solid var(--rule);padding-top:32px}
+article p{margin:0}
+article figure{margin:8px 0;display:flex;flex-direction:column;gap:8px}
+article figure img{display:block;max-width:100%;height:auto;border:1px solid var(--rule);border-radius:6px;background:#fff}
+article figcaption{font-family:var(--sans);font-size:14px;color:var(--muted)}
+article strong{font-weight:600}
+article hr{border:0;border-top:1px solid var(--rule);margin:8px 0;width:100%}
+article .bio{font-style:italic;color:var(--muted);font-size:16px}
+article .note{font-style:italic;color:var(--muted);padding-left:16px;border-left:3px solid var(--rule)}
+article h2{font-family:var(--sans);font-size:22px;line-height:1.3;font-weight:600;margin:16px 0 0;text-wrap:balance}
+article ul{margin:0;padding-left:24px;display:flex;flex-direction:column;gap:8px}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+</head>
+<body>
+<main class="wrap">
+<a class="back" href="index.html">← John Waters portfolio</a>
+<aside class="archive" aria-label="About this page">
+<span><strong>Reprinted copy.</strong> Originally published November 20, 2024 on the HUMAN blog. <a href="https://www.humansecurity.com/learn/blog/unmasking-malvertising-how-obfuscation-creates-false-safety-and-how-to-defeat-it/" target="_blank" rel="noopener">Read the original</a>.</span>
+<span>Co-written by John Waters and Lindsay Superczynski-Matthies.</span>
+</aside>
+<header>
+<span class="eyebrow">HUMAN Blog · Unmasking Malvertising</span>
+<h1>Unmasking malvertising: How obfuscation creates false safety and how to defeat it</h1>
+<span class="meta"><b>John Waters and Lindsay Superczynski-Matthies</b> · November 20, 2024 · 5 min read · Ad Fraud, Malvertising</span>
+</header>
+<figure class="herofig"><img class="hero" src="assets/blog-unmasking-malvertising.jpg" alt="Purple stone carved with rows of Egyptian hieroglyphs"></figure>
+<article>
+<p class="note">Editors’ note: In this series, “Unmasking Malvertising,” we explore various ways in which malvertising is executed to help us collectively see the digital landscape not just as defenders, but through the eyes of those who would exploit it. In this installment, we explore the role of obfuscation in malvertising, and how malvertising prevention technology can help thwart malicious actors.</p>
+<p>Outsmarting those who seek to exploit digital advertising requires delving into the minds of bad actors. We need to act like behavioral analysis detectives, anticipating how malicious actors will disguise their malicious code, where they’ll place their traps, and which vulnerabilities they’ll try to exploit next.</p>
+<p>Malicious actors use malvertising attacks to facilitate stealing a person’s money or identity or to infect a user’s device. These are significant issues that publishers, ad platforms, regulatory bodies, government agencies, and others take seriously.</p>
+<p>To adopt the mindset of malicious actors, let’s consider some of their key tactics. Bad actors use various methodologies to avoid getting caught, such as device fingerprinting, environment detection, cloaking techniques such as microtargeting, vendor detection and evasion, and obfuscation.</p>
+<p>Broadly defined, obfuscation is the practice of making something difficult to understand or interpret. Obfuscation is not in and of itself a threat (most ads contain innocuous obfuscated code). Like so many other things, it depends on how obfuscation is used and who uses it.</p>
+<p>Obfuscation in malvertising, though, is particularly insidious, because it allows malicious actors to hide in plain sight as they carry out their attacks.</p>
+<h2>What is obfuscation in malvertising?</h2>
+<p>When a malvertising attack incorporates obfuscation, the obfuscation deliberately conceals malicious code within a digital advertisement. Threat actors deceptively write their code to make it difficult for security tools and researchers to recognize the code’s true purpose, while ensuring the code continues to function as intended. Simply put, the “message” remains intact, but it’s scrambled in a way that only the intended recipient (in this case, a live browser) can decipher.</p>
+<p>Then, if an ad enters the ad ecosystem and reaches an end user, that user’s browser renders the code, including the obfuscated malicious lines.</p>
+<p>This code delivers the intended malicious payload, which was obfuscated, and therefore hidden, within the creative assets. That payload, in turn, can cause real harm to end users: directly stealing a person’s money, identity theft, credential harvesting, or many varieties of infecting a user’s device.</p>
+<p>Bad actors utilize concepts of cryptography, often making their code unreadable without decryption. Think of it as the digital version of the old cereal box decoder rings or a traditional cipher disk. These tools embody the concept of obfuscation simply – spin the ring and you decode that A = 36, B = 13, C = 75, and so on.</p>
+<h2>How does obfuscation threaten digital ads?</h2>
+<p>Let’s walk through a simple example. A bad actor wants to redirect a user to a landing page. To accomplish this without getting caught by emulators and scanning environments, the malvertiser obfuscates two lines of code:</p>
+<ul><li>A fingerprinting check to test if the ad is rendering on a real user device, such as a touchscreen check for iPhones</li><li>A malicious function, ‘top.location.href,’ that relocates the user to the attackers intended URL</li></ul>
+<p>When a browser reads the lines of obfuscated code as the ad attempts to render, the included cypher is used by the computer to decode the functions in real time. Without a strong enough protection solution that is adept at decoding obfuscation, the malicious code to redirect a user can execute.</p>
+<p>That is to say, even without a user taking any action, the function above navigates the user to a malicious landing page that tries a classic phishing scheme such as, “You won a gift card! Enter your details to receive it.”</p>
+<p>Bad actors often don’t use obfuscation just once per attack, however. They obfuscate multiple calls or payloads. Each step makes it more likely that a human reviewing this ad, or a simple malvertising offline scanning environment, does not or cannot look any further into the code.</p>
+<p>If everything is hidden, how can publishers and platforms prevail? The answer is: not alone.</p>
+<h2>Deciphering the code with malvertising prevention</h2>
+<p>In the battle against malvertising, what you can’t see can hurt you. Understanding and detecting obfuscation in malvertising is crucial to prevention. In this fight, the first step is to identify the right partner that is adept at deciphering hidden code and thinking like a bad actor in order to disrupt malicious activity.</p>
+<p>Combating obfuscated malvertising attacks requires a multilayered approach. Our threat researchers advise security teams to look for several key indicators (and these best practices apply beyond malvertising analysis as well):</p>
+<ul><li>Unusual code patterns and execution flows</li><li>Multiple layers of encoding or encryption</li><li>Anomalous behavior in ad rendering</li></ul>
+<p>The key is striking the right balance: being thorough enough to catch sophisticated attacks while avoiding false positives that could disrupt innocuous ads.</p>
+<h2>HUMAN Malvertising Defense</h2>
+<p>HUMAN’s proven Malvertising Defense solution demonstrates that to combat malvertisers’ efforts, it takes a combination of expert threat research, reverse-engineering, and specialized insight from the HUMAN Malvertising Defense script.</p>
+<p>Using runtime behavioral analysis, HUMAN’s Malvertising Defense has the advantage of seeing all this obfuscation play out and attempt to load a final malicious payload.</p>
+<p>Our solution incorporates advanced machine learning, real-time monitoring, and years of expert threat intelligence to protect against obfuscated threats, processing billions of transactions daily to keep major advertising platforms safe from emerging attack patterns.</p>
+<p>To learn more about HUMAN Malvertising Defense, click here to talk to a Human.</p>
+</article>
+</main>
+</body>
+</html>
