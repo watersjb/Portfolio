@@ -51,7 +51,7 @@
       var out = [];
       tpl.content.childNodes.forEach(function (n) { build(n, vals, out); });
       root.replaceChildren.apply(root, out);
-      document.documentElement.style.overflow = (vals.hasVideo || vals.hasReader) ? 'hidden' : '';
+      document.documentElement.style.overflow = (vals.hasVideo || vals.hasReader || vals.hasArticle) ? 'hidden' : '';
       c._vals = vals;
     };
     c._render();
@@ -59,7 +59,9 @@
       if (e.key !== 'Escape' || !c._vals) return;
       if (c._vals.hasVideo && c._vals.closeVideo) c._vals.closeVideo();
       else if (c._vals.hasReader && c._vals.closeReader) c._vals.closeReader();
+      else if (c._vals.hasArticle && c._vals.closeArticle) c._vals.closeArticle();
     });
+    window.addEventListener('message', function (e) { if (e.data === 'jw-close-article' && c._vals && c._vals.closeArticle) c._vals.closeArticle(); });
     if (typeof c.componentDidMount === 'function') c.componentDidMount();
   };
 })();

@@ -372,6 +372,21 @@ section[id]{scroll-margin-top:60px}
 </div>
 </div>
 </sc-if>
+<sc-if value="{{hasArticle}}" hint-placeholder-val="{{ false }}">
+<div class="rdr-wrap" style="position: fixed; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center; padding: 24px">
+<button type="button" aria-label="Close" onClick="{{closeArticle}}" style="position: absolute; inset: 0; border: none; background: rgba(19, 41, 61, 0.7); cursor: pointer"></button>
+<div role="dialog" aria-modal="true" aria-label="{{article.title}}" style="position: relative; width: 100%; max-width: 860px; height: calc(100vh - 48px); box-sizing: border-box; background: #FFFFFF; color: #13293D; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 24px 60px rgba(19, 41, 61, 0.35)">
+<div style="flex: none; display: flex; align-items: center; gap: 12px; padding: 10px 8px 10px 20px; border-bottom: 1px solid #D6E1E3">
+<span style="flex: 1; min-width: 0; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #0B7A5E; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{article.label}}</span>
+<sc-if value="{{article.source}}" hint-placeholder-val="{{ true }}"><a href="{{article.source}}" target="_blank" rel="noopener" style="flex: none; display: inline-flex; align-items: center; min-height: 36px; padding: 0 14px; background: #13293D; color: #FFFFFF; border-radius: 999px; font-size: 13px; font-weight: 600; text-decoration: none; white-space: nowrap">Read the original ↗</a></sc-if>
+<button type="button" aria-label="Close" onClick="{{closeArticle}}" style="flex: none; width: 44px; height: 44px; border: none; background: none; color: #4F6170; cursor: pointer; display: flex; align-items: center; justify-content: center">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg>
+</button>
+</div>
+<iframe src="{{article.file}}" title="{{article.title}}" style="flex: 1; width: 100%; border: 0; background: #F8FAFA"></iframe>
+</div>
+</div>
+</sc-if>
 <footer style="background: #0F2233">
 <div style="max-width: 1160px; margin: 0 auto; padding: 40px 24px; display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: center; font-size: 14px; color: #C9D6E0">
 <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 18px; font-weight: 600; color: #FFFFFF">John Waters</span>
@@ -1001,6 +1016,7 @@ const BRIEFS = [
   "keep": false
  }
 ];
+const ARTICLES = {"blog-click-protection.html": {"file": "blog-click-protection.html", "label": "HUMAN Blog · 2026", "title": "The Role of Comprehensive Click Protection in Campaigns", "source": "https://www.humansecurity.com/learn/blog/the-role-of-comprehensive-click-protection-in-campaigns/"}, "blog-unmasking-malvertising.html": {"file": "blog-unmasking-malvertising.html", "label": "HUMAN Blog · Unmasking Malvertising · 2024", "title": "Unmasking malvertising: How obfuscation creates false safety and how to defeat it", "source": "https://www.humansecurity.com/learn/blog/unmasking-malvertising-how-obfuscation-creates-false-safety-and-how-to-defeat-it/"}, "blog-adweek-ctv-fraud.html": {"file": "blog-adweek-ctv-fraud.html", "label": "Adweek · Sponsored Content · 2021", "title": "As Connected TV Ad Spend Soars, So Does Ad Fraud", "source": "https://www.adweek.com/sponsored/as-connected-tv-ad-spend-soars-so-does-ad-fraud/"}, "blog-gdpr-turns-3.html": {"file": "blog-gdpr-turns-3.html", "label": "IBTimes · Opinion · 2019", "title": "GDPR Turns 3: What Has The Advertising Industry Learned Thus Far?", "source": "https://www.ibtimes.com/gdpr-turns-3-what-has-advertising-industry-learned-thus-far-2794263"}, "blog-ivt-optimization.html": {"file": "blog-ivt-optimization.html", "label": "HUMAN Blog · 2026", "title": "How Invalid Traffic Corrupts Campaign Optimization (And What to Do About It)", "source": "https://www.humansecurity.com/learn/blog/invalid-traffic-campaign-optimization/"}, "blog-elections-malvertising.html": {"file": "blog-elections-malvertising.html", "label": "HUMAN Blog · 2025", "title": "The Impact of Elections on Malvertising Patterns", "source": "https://www.humansecurity.com/learn/blog/the-impact-of-elections-on-malvertising-patterns/"}, "anyclip-qa.html": {"file": "anyclip-qa.html", "label": "Q&A · Adotas · 2019", "title": "Q&A with Gil Becker, CEO of AnyClip", "source": "https://web.archive.org/web/20190411172253/http://www.adotas.com/2019/04/qa-gil-becker-ceo-anyclip/"}, "dmn-podcast.html": {"file": "dmn-podcast.html", "label": "Podcast · DMN One-on-One · 2019", "title": "One on One: Content Meets Audience", "source": ""}};
 const DOCS = {
 "https://www.humansecurity.com/wp-content/uploads/2025/06/Ad-Click-Defense_Page-Intelligence-for-Advertisers_061025.pdf": {
 "label": "Solution brief · 2025",
@@ -1731,14 +1747,15 @@ const talks = TALKS.filter((t) => t.keep !== false).map((t) => card({ isHref: tr
 const vids = VIDEOS.map((v, i) => v.keep === false ? null : card({ isButton: true, act: () => this.setState({ video: i }), thumb: v.poster, play: true, label: 'Video · Xaxis · ' + v.length, title: v.title, note: 'Led from storyboard to final cut' + (v.studio ? ' · Animation by ' + v.studio : '') }));
 const ordered = (all, order) => order.map((o) => all.find((x) => x.title.indexOf(o) === 0)).filter(Boolean).concat(all.filter((x) => !order.some((o) => x.title.indexOf(o) === 0)));
 const viaDoc = (x) => DOCS[x.href] ? Object.assign({}, x, { isHref: false, isButton: true, act: () => this.setState({ doc: x.href }), cta: (x.cta || '').replace(/ ?↗$/, '') }) : x;
+const viaArt = (x) => ARTICLES[x.href] ? Object.assign({}, x, { isHref: false, isButton: true, act: () => this.setState({ art: x.href }), cta: (x.cta || '').replace(/ ?↗$/, '') }) : x;
 return {
 accent: this.props.accent ?? '#7FD1B5',
 showBar: !!st.showBar,
-writing: writing.map(viaDoc),
+writing: writing.map(viaDoc).map(viaArt),
 cases: CASES.filter((c) => c.keep).map((c) => card({ isHref: true, href: c.href, thumb: c.thumb, pos: 'top', label: 'HUMAN · ' + c.org, title: c.title, tile: c.org, cta: 'Read the case study ↗' })).map(viaDoc),
 ebooks: ebooks.map(viaDoc),
 briefs: BRIEFS.filter((b) => b.keep).map((b) => card({ isHref: true, href: b.href, thumb: b.thumb, pos: 'top', label: b.label, title: b.title, tile: 'HUMAN', cta: 'View the brief ↗' })).map(viaDoc),
-webinars: ordered(mediaModal.concat(talks.filter((t) => !t.isVid)), ['The Cost of Malvertising', 'Premium at Scale', 'One on One', 'Bad Bots']),
+webinars: ordered(mediaModal.concat(talks.filter((t) => !t.isVid)), ['The Cost of Malvertising', 'Premium at Scale', 'One on One', 'Bad Bots']).map(viaArt),
 videos: ordered(vids.filter(Boolean).concat(talks.filter((t) => t.isVid)), ['Xaxis Brand Video', 'Xaxis: Better Audiences', "HUMAN's MediaGuard", 'What We Do', 'Turbine', 'Marketing Integrity from White Ops']),
 hasOpen: openIndex >= 0,
 open: openIndex >= 0 ? WRITING[openIndex] : { paras: [], qa: [] },
@@ -1748,7 +1765,10 @@ video: vIndex >= 0 ? Object.assign({ noStudio: !VIDEOS[vIndex].studio }, VIDEOS[
 closeVideo: () => this.setState({ video: -1 }),
 hasReader: !!(st.doc && DOCS[st.doc]),
 reader: (st.doc && DOCS[st.doc]) || { pages: [] },
-closeReader: () => this.setState({ doc: null })
+closeReader: () => this.setState({ doc: null }),
+hasArticle: !!(st.art && ARTICLES[st.art]),
+article: (st.art && ARTICLES[st.art]) || {},
+closeArticle: () => this.setState({ art: null })
 };
 }
 }
