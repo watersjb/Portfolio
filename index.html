@@ -19,6 +19,7 @@ section[id]{scroll-margin-top:60px}
 .barlink{transition:color .15s ease}
 .barlink:hover{color:#FFFFFF !important;text-decoration:underline !important;text-underline-offset:4px}
 .barnav{scrollbar-width:none}.barnav::-webkit-scrollbar{display:none}
+@media (max-width: 600px){.rdr-wrap{padding:10px !important}.rdr-head{position:static !important;padding:18px 56px 14px 18px !important}.rdr-title{font-size:20px !important}.rdr-body{padding:16px 14px 20px !important}.rdr-pages{padding:8px !important}}
 </style>
 </head>
 <body>
@@ -347,6 +348,31 @@ section[id]{scroll-margin-top:60px}
 </div>
 </section>
 
+<sc-if value="{{hasReader}}" hint-placeholder-val="{{ false }}">
+<div class="rdr-wrap" style="position: fixed; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center; padding: 24px">
+<button type="button" aria-label="Close" onClick="{{closeReader}}" style="position: absolute; inset: 0; border: none; background: rgba(19, 41, 61, 0.7); cursor: pointer"></button>
+<div role="dialog" aria-modal="true" aria-labelledby="reader-title" style="position: relative; width: 100%; max-width: 820px; max-height: calc(100vh - 48px); overflow-y: auto; box-sizing: border-box; background: #FFFFFF; color: #13293D; border-radius: 12px; box-shadow: 0 24px 60px rgba(19, 41, 61, 0.35)">
+<div class="rdr-head" style="position: sticky; top: 0; z-index: 2; background: #FFFFFF; border-bottom: 1px solid #D6E1E3; padding: 20px 64px 16px 28px; display: flex; flex-direction: column; gap: 8px">
+<button type="button" aria-label="Close" onClick="{{closeReader}}" style="position: absolute; top: 8px; right: 8px; width: 44px; height: 44px; border: none; background: none; color: #4F6170; cursor: pointer; display: flex; align-items: center; justify-content: center">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg>
+</button>
+<span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #0B7A5E">{{reader.label}}</span>
+<h3 id="reader-title" class="rdr-title" style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 600; font-size: 24px; line-height: 1.2; margin: 0">{{reader.title}}</h3>
+<div style="display: flex; flex-wrap: wrap; gap: 10px; padding-top: 4px">
+<a href="{{reader.pdf}}" download="HUMAN_Malvertising-Decoder.pdf" style="display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 16px; background: #13293D; color: #FFFFFF; border-radius: 999px; font-size: 14px; font-weight: 600; text-decoration: none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"></path><path d="m7 10 5 5 5-5"></path><path d="M5 21h14"></path></svg>Download the PDF</a>
+<a href="{{reader.source}}" style="display: inline-flex; align-items: center; min-height: 40px; padding: 0 16px; border: 1.5px solid #13293D; color: #13293D; border-radius: 999px; font-size: 14px; font-weight: 600; text-decoration: none">View on HUMAN's site ↗</a>
+</div>
+</div>
+<div class="rdr-body" style="padding: 20px 28px 28px; display: flex; flex-direction: column; gap: 16px">
+<p style="margin: 0; font-size: 17px; line-height: 1.65">{{reader.about}}</p>
+<p style="margin: 0; padding: 12px 14px; background: #E2EEEB; border-radius: 8px; font-size: 14px; line-height: 1.5; color: #3A4D5C">{{reader.credit}} Originally published on <a href="{{reader.source}}">humansecurity.com</a>.</p>
+<div class="rdr-pages" style="display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 16px; background: #E9EFF1; border-radius: 10px">
+<sc-for list="{{reader.pages}}" as="pg" hint-placeholder-count="12"><img src="{{pg.src}}" alt="{{pg.alt}}" loading="lazy" width="1000" height="1572" style="display: block; width: 100%; max-width: 600px; height: auto; border-radius: 4px; box-shadow: 0 4px 16px rgba(19, 41, 61, 0.18); background: #FFFFFF"></sc-for>
+</div>
+</div>
+</div>
+</div>
+</sc-if>
 <footer style="background: #0F2233">
 <div style="max-width: 1160px; margin: 0 auto; padding: 40px 24px; display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: center; font-size: 14px; color: #C9D6E0">
 <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 18px; font-weight: 600; color: #FFFFFF">John Waters</span>
@@ -578,8 +604,66 @@ const WRITING = [
   "year": "2025",
   "ebook": true,
   "cover": "assets/079c16c2ca05520771551bdac6f4c420.jpg",
-  "cta": "View the guide ↗",
-  "href": "https://www.humansecurity.com/learn/resources/malvertising-decoder-a-publishers-guide/"
+  "cta": "Read the guide",
+  "href": "https://www.humansecurity.com/learn/resources/malvertising-decoder-a-publishers-guide/",
+  "reader": {
+   "label": "Ebook · HUMAN Security · 2025",
+   "title": "The Malvertising Decoder: A Publisher's Guide to Hidden Ad Threats in Digital Ads",
+   "about": "A field guide for publishers on why malvertising is so hard to catch. It explains how bad ads stay hidden by showing up only for certain users, devices or times, and looking clean whenever someone scans them. Then it walks through seven common threats, from auto-redirects and cloaked ads to pixel stuffing and client-side injections.",
+   "credit": "Conceived and written by John Waters. Design by the creative team.",
+   "pdf": "assets/c513319067003eb2b20f1b8b777b5994.pdf",
+   "source": "https://www.humansecurity.com/learn/resources/malvertising-decoder-a-publishers-guide/",
+   "pages": [
+    {
+     "src": "assets/3fbf1a2279b69f32e8d39d18dc41841e.jpg",
+     "alt": "Page 1 of 12"
+    },
+    {
+     "src": "assets/ece7d639b1ca592ea2c0f45a579487ed.jpg",
+     "alt": "Page 2 of 12"
+    },
+    {
+     "src": "assets/07b3814e98dcb8c1d86bda616cb37c30.jpg",
+     "alt": "Page 3 of 12"
+    },
+    {
+     "src": "assets/9e2834d1d28b3c13f282f65a48d5d120.jpg",
+     "alt": "Page 4 of 12"
+    },
+    {
+     "src": "assets/e2e0526cee12042a410b070151b3ba5c.jpg",
+     "alt": "Page 5 of 12"
+    },
+    {
+     "src": "assets/fd31d702d8416573cfc7992653ebe9ad.jpg",
+     "alt": "Page 6 of 12"
+    },
+    {
+     "src": "assets/c102b965a2e0086ebcb52adca852443b.jpg",
+     "alt": "Page 7 of 12"
+    },
+    {
+     "src": "assets/7b5d3f77dff4f67be3a265526b32bfba.jpg",
+     "alt": "Page 8 of 12"
+    },
+    {
+     "src": "assets/d27ce83b7a768260240e44c71863171e.jpg",
+     "alt": "Page 9 of 12"
+    },
+    {
+     "src": "assets/f313f16424812153dd55b383bfcefb93.jpg",
+     "alt": "Page 10 of 12"
+    },
+    {
+     "src": "assets/1836b512a6254ce5542b3a2e73f65891.jpg",
+     "alt": "Page 11 of 12"
+    },
+    {
+     "src": "assets/a15f9e7e278ee003f0046862a8a55576.jpg",
+     "alt": "Page 12 of 12"
+    }
+   ]
+  }
  },
  {
   "title": "See More, Win More",
@@ -701,7 +785,8 @@ const TALKS = [
   "cta": "Watch",
   "poster": "assets/ecba0b61c6efe691ffaa5b14829cc288.jpg",
   "pos": "right bottom",
-  "keep": true
+  "keep": true,
+  "backupSrc": "assets/aa24c5c955ceda2719f1ea332d618d06.mp4"
  },
  {
   "org": "Webinar",
@@ -1002,7 +1087,7 @@ const writing = [], ebooks = [], mediaModal = [];
 WRITING.forEach((p, i) => {
 const base = { isHref: true, href: p.href, label: p.year ? p.kind + ' · ' + p.year : p.kind, title: p.title, note: p.note || '', cta: p.cta || '', tile: p.org };
 if (p.cat === 'media') mediaModal.push(card(Object.assign(base, { thumb: p.poster || '' })));
-else if (p.ebook) ebooks.push(card(Object.assign(base, { thumb: p.cover || '', pos: 'top' })));
+else if (p.ebook) ebooks.push(card(Object.assign(base, { thumb: p.cover || '', pos: 'top' }, p.reader ? { isHref: false, isButton: true, act: () => this.setState({ reader: i }) } : {})));
 else writing.push(card(Object.assign(base, { thumb: p.thumb || '', pos: p.pos || 'center' })));
 });
 INFOGRAPHICS.filter((x) => x.keep).forEach((x) => ebooks.push(card({ isHref: true, href: x.href, thumb: x.thumb, pos: 'top', label: x.label, title: x.title, tile: 'HUMAN', cta: 'View the PDF ↗' })));
@@ -1023,7 +1108,10 @@ open: openIndex >= 0 ? WRITING[openIndex] : { paras: [], qa: [] },
 close: () => this.setState({ open: -1 }),
 hasVideo: vIndex >= 0,
 video: vIndex >= 0 ? Object.assign({ noStudio: !VIDEOS[vIndex].studio }, VIDEOS[vIndex]) : {},
-closeVideo: () => this.setState({ video: -1 })
+closeVideo: () => this.setState({ video: -1 }),
+hasReader: typeof st.reader === 'number' && st.reader >= 0,
+reader: typeof st.reader === 'number' && st.reader >= 0 ? WRITING[st.reader].reader : { pages: [] },
+closeReader: () => this.setState({ reader: -1 })
 };
 }
 }

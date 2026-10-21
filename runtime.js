@@ -51,12 +51,14 @@
       var out = [];
       tpl.content.childNodes.forEach(function (n) { build(n, vals, out); });
       root.replaceChildren.apply(root, out);
-      document.documentElement.style.overflow = vals.hasVideo ? 'hidden' : '';
+      document.documentElement.style.overflow = (vals.hasVideo || vals.hasReader) ? 'hidden' : '';
       c._vals = vals;
     };
     c._render();
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && c._vals && c._vals.hasVideo && c._vals.closeVideo) c._vals.closeVideo();
+      if (e.key !== 'Escape' || !c._vals) return;
+      if (c._vals.hasVideo && c._vals.closeVideo) c._vals.closeVideo();
+      else if (c._vals.hasReader && c._vals.closeReader) c._vals.closeReader();
     });
     if (typeof c.componentDidMount === 'function') c.componentDidMount();
   };
