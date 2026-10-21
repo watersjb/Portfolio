@@ -40,13 +40,27 @@ article ul{margin:0;padding-left:24px;display:flex;flex-direction:column;gap:8px
 a{color:var(--accent)}
 a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 </style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700&amp;family=Public+Sans:wght@500;600&amp;display=swap">
+<style>
+.jw-bar{position:sticky;top:0;z-index:40;background:#1F5FAD;box-shadow:0 2px 14px rgba(15,34,51,.35);padding-top:env(safe-area-inset-top,0px)}
+.jw-bar-in{box-sizing:border-box;width:100%;max-width:1160px;margin:0 auto;padding:0 24px;height:44px;display:flex;align-items:center;gap:24px}
+.jw-home{flex:none;display:inline-flex;align-items:center;gap:8px;font-family:'Bricolage Grotesque',sans-serif;font-size:16px;font-weight:700;color:#FFFFFF !important;text-decoration:none;white-space:nowrap}
+.jw-home span{font-family:'Public Sans',system-ui,sans-serif;font-size:13px;font-weight:600;color:#BFD3EE}
+.jw-nav{flex:0 1 auto;margin-left:auto;min-width:0;display:flex;gap:18px;overflow-x:auto;white-space:nowrap;font-family:'Public Sans',system-ui,sans-serif;font-size:14px;font-weight:500;padding:0 2px;scrollbar-width:none}
+.jw-nav::-webkit-scrollbar{display:none}
+.jw-nav a{color:#E3ECF7 !important;text-decoration:none;transition:color .15s ease}
+.jw-back{margin-left:auto;font-family:'Public Sans',system-ui,sans-serif;font-size:14px;font-weight:600;color:#E3ECF7 !important;text-decoration:none;white-space:nowrap}
+.jw-bar a:hover{color:#FFFFFF !important;text-decoration:underline;text-underline-offset:4px}
+.jw-bar a:focus-visible{outline:3px solid #7FD1B5;outline-offset:2px}
+@media (max-width:640px){.jw-home span{display:none}.jw-bar-in{padding:0 16px;gap:16px}}
+</style>
 </head>
 <body>
+<div class="jw-bar" role="banner"><div class="jw-bar-in"><a class="jw-home" href="index.html">John Waters</a><a class="jw-back" href="index.html">← Back to Portfolio</a></div></div>
 <main class="wrap">
-<a class="back" href="index.html">← John Waters portfolio</a>
 <aside class="archive" aria-label="About this page">
 <span><strong>Reprinted copy.</strong> Originally published November 20, 2024 on the HUMAN blog. <a href="https://www.humansecurity.com/learn/blog/unmasking-malvertising-how-obfuscation-creates-false-safety-and-how-to-defeat-it/" target="_blank" rel="noopener">Read the original</a>.</span>
-<span>Co-written by John Waters and Lindsay Superczynski-Matthies.</span>
+<span>John Waters led the overall writing, with input from Lindsay Superczynski-Matthies.</span>
 </aside>
 <header>
 <span class="eyebrow">HUMAN Blog · Unmasking Malvertising</span>
