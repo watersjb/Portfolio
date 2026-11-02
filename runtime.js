@@ -53,6 +53,9 @@
       root.replaceChildren.apply(root, out);
       document.documentElement.style.overflow = (vals.hasVideo || vals.hasReader || vals.hasArticle) ? 'hidden' : '';
       c._vals = vals;
+      var key = vals.hasReader ? 'Document: ' + vals.reader.title : vals.hasArticle ? 'Article: ' + vals.article.title : vals.hasVideo ? 'Video: ' + vals.video.title : null;
+      if (key && key !== c._lastOpen && window.jwTrack) window.jwTrack('open: ' + key, key);
+      c._lastOpen = key;
     };
     c._render();
     document.addEventListener('keydown', function (e) {
